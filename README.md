@@ -174,6 +174,21 @@
             box-shadow: 0 15px 25px rgba(37, 117, 252, 0.4);
         }
 
+        /* Tombol Download Baru (MediaFire Style) */
+        .btn-download-link {
+            background: linear-gradient(to right, #0070ff, #00c6ff); /* Warna Biru MediaFire */
+            color: white;
+            margin-bottom: 12px;
+            box-shadow: 0 5px 15px rgba(0, 112, 255, 0.3);
+        }
+        
+        .btn-download-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 112, 255, 0.4);
+            filter: brightness(1.1);
+        }
+
+        /* Tombol WhatsApp (Kode Akses) */
         .btn-whatsapp {
             background: #25D366;
             color: white;
@@ -292,14 +307,14 @@
                 Silakan pilih opsi di bawah ini untuk mendapatkan aplikasi dan lisensi Anda.
             </p>
 
-            <!-- Tombol Download -->
-            <a href="https://wa.me/6285882382854?text=Halo%20admin,%20saya%20sudah%20login.%20Saya%20ingin%20download%20aplikasi%20NETYS." class="btn btn-whatsapp" target="_blank">
-                <i class="fab fa-whatsapp"></i> Download Sekarang
+            <!-- Tombol 1: Download Langsung (MediaFire) -->
+            <a href="https://www.mediafire.com/file/j1a1o1xa95yzgok/NETYSV4%252BBY_AZFER.apk/file" class="btn btn-download-link" target="_blank">
+                <i class="fas fa-cloud-download-alt"></i> Download Sekarang
             </a>
 
-            <!-- Tombol Ambil Kode -->
-            <a href="https://wa.me/6285882382854?text=Halo%20admin,%20saya%20sudah%20login.%20Saya%20ingin%20mengambil%20Kode%20Aktivasi%20Premium." class="btn btn-whatsapp" style="background: white; color: #25D366; border: 2px solid #25D366;" target="_blank">
-                <i class="fas fa-key"></i> Ambil Kode Aksesnya
+            <!-- Tombol 2: Ambil Kode via WA -->
+            <a href="https://wa.me/6285882382854?text=Halo%20admin,%20saya%20sudah%20login.%20Saya%20ingin%20mengambil%20Kode%20Aktivasi%20Premium." class="btn btn-whatsapp" target="_blank">
+                <i class="fab fa-whatsapp"></i> Ambil Kode Aksesnya
             </a>
             
             <button onclick="logout()" style="margin-top: 15px; background: none; border: none; color: #9ca3af; font-size: 12px; cursor: pointer; text-decoration: underline;">
@@ -312,7 +327,6 @@
     <script>
         // Konfigurasi Kode Akses
         const VALID_CODE = "AZFER.ID";
-        const WA_NUMBER = "6285882382854";
 
         function verifyCode() {
             const inputCode = document.getElementById('access-code').value;
