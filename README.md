@@ -3,362 +3,395 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NETYS - Premium Access</title>
-    <!-- Font Google: Poppins -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <title>NETYS - Secure Gateway</title>
+    <!-- Font Google -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Segoe+UI&display=swap" rel="stylesheet">
     <!-- Icon FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
-        :root {
-            --primary-color: #6a11cb;
-            --secondary-color: #2575fc;
-            --text-dark: #1f2937;
-            --glass-bg: rgba(255, 255, 255, 0.95);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
-
+        /* --- GLOBAL STYLES --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
         body {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-            min-height: 100vh;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #0f172a, #1e2937);
+            color: #e2e8f0;
+            height: 100vh;
             display: flex;
-            justify-content: center;
             align-items: center;
+            justify-content: center;
             overflow: hidden;
+        }
+
+        .main-container {
             position: relative;
-        }
-
-        /* Background Shapes */
-        .shape {
-            position: absolute;
-            filter: blur(50px);
-            z-index: 0;
-            animation: float 6s infinite ease-in-out;
-        }
-        .shape-1 { top: -50px; left: -50px; width: 200px; height: 200px; background: rgba(255, 215, 0, 0.4); border-radius: 50%; }
-        .shape-2 { bottom: -50px; right: -50px; width: 250px; height: 250px; background: rgba(255, 255, 255, 0.3); border-radius: 50%; animation-delay: 3s; }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-        }
-
-        /* Main Card Container */
-        .container {
-            position: relative;
-            z-index: 10;
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            padding: 40px 30px;
-            border-radius: 24px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
             width: 90%;
             max-width: 420px;
+            min-height: 500px;
+            background: rgba(15, 23, 42, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            border: 1px solid #334155;
+            padding: 30px;
             text-align: center;
             transition: all 0.5s ease;
-            min-height: 500px; /* Menjaga tinggi agar tidak kaget saat ganti tampilan */
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        /* --- STYLES FOR LOGIN & DOWNLOAD SECTION --- */
-        .logo-area { margin-bottom: 25px; }
-        .app-icon {
-            width: 80px; height: 80px;
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-            border-radius: 20px;
-            display: inline-flex; align-items: center; justify-content: center;
-            color: white; font-size: 32px;
-            box-shadow: 0 10px 20px rgba(30, 60, 114, 0.3);
-            margin-bottom: 15px;
-        }
-        
-        h1 { color: var(--text-dark); font-weight: 700; font-size: 26px; letter-spacing: -0.5px; }
-        p.subtitle { color: #6b7280; font-size: 14px; margin-bottom: 30px; }
-
-        .input-group { position: relative; margin-bottom: 20px; text-align: left; }
-        .input-group label { display: block; font-size: 12px; color: #6b7280; margin-bottom: 8px; font-weight: 600; margin-left: 5px; }
-        .input-field {
-            width: 100%; padding: 15px 20px; border-radius: 12px;
-            border: 2px solid #e5e7eb; background: #f9fafb; font-size: 16px;
-            transition: all 0.3s; outline: none; text-align: center; letter-spacing: 2px; font-weight: 600; color: var(--text-dark);
-        }
-        .input-field:focus { border-color: var(--secondary-color); background: white; box-shadow: 0 0 0 4px rgba(37, 117, 252, 0.1); }
-
-        .btn {
-            width: 100%; padding: 16px; border: none; border-radius: 14px;
-            font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.3s ease;
-            display: flex; align-items: center; justify-content: center; gap: 10px; text-decoration: none;
-        }
-        .btn-primary { background: linear-gradient(to right, var(--primary-color), var(--secondary-color)); color: white; box-shadow: 0 10px 20px rgba(37, 117, 252, 0.3); }
-        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 15px 25px rgba(37, 117, 252, 0.4); }
-        
-        .btn-download-link { background: linear-gradient(to right, #0070ff, #00c6ff); color: white; margin-bottom: 12px; box-shadow: 0 5px 15px rgba(0, 112, 255, 0.3); }
-        .btn-download-link:hover { transform: translateY(-2px); filter: brightness(1.1); }
-
-        .btn-generator { background: #2d2d2d; color: #fff; margin-bottom: 12px; border: 1px solid #444; }
-        .btn-generator:hover { background: #444; transform: translateY(-2px); }
-
-        .btn-outline { background: transparent; border: 2px solid #e5e7eb; color: #6b7280; }
-        .btn-outline:hover { border-color: var(--text-dark); color: var(--text-dark); background: white; }
-
-        .error-msg { color: #ef4444; font-size: 13px; margin-top: 10px; display: none; animation: shake 0.5s; }
-        @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
-
-        .spinner { display: none; width: 20px; height: 20px; border: 3px solid rgba(255,255,255,0.3); border-radius: 50%; border-top-color: white; animation: spin 1s ease-in-out infinite; }
-        @keyframes spin { to { transform: rotate(360deg); } }
-
-        /* --- STYLES FOR GENERATOR SECTION (Dark Mode Style) --- */
-        .generator-container {
-            background-color: #2d2d2d;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-            text-align: center;
-            width: 100%;
-            border: 1px solid #444;
-            color: #ffffff;
-            display: none; /* Hidden by default */
-        }
-        
-        .gen-title { margin-top: 0; color: #00d2ff; font-size: 24px; margin-bottom: 20px; }
-        
-        .status-box { margin: 20px 0; min-height: 60px; display: flex; flex-direction: column; justify-content: center; align-items: center; }
-        .timer { font-size: 2em; font-weight: bold; color: #ffcc00; margin: 10px 0; }
-        
-        .gen-btn {
-            background-color: #007bff; color: white; border: none; padding: 12px 24px;
-            font-size: 16px; border-radius: 5px; cursor: pointer; transition: background 0.3s;
-            width: 100%; font-weight: bold;
-        }
-        .gen-btn:hover { background-color: #0056b3; }
-        .gen-btn:disabled { background-color: #555; cursor: not-allowed; color: #aaa; }
-        .btn-create-now { background-color: #28a745 !important; }
-        .btn-create-now:hover { background-color: #218838 !important; }
-
-        .key-display {
-            background-color: #000; color: #0f0; font-family: 'Courier New', Courier, monospace;
-            padding: 15px; border-radius: 5px; font-size: 1.2em; letter-spacing: 2px;
-            margin-top: 10px; border: 1px dashed #0f0; display: none; word-break: break-all;
         }
 
         /* Utility Classes */
         .hidden { display: none !important; }
-        .fade-in { animation: fadeIn 0.5s forwards; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .fade-in { animation: fadeIn 0.6s ease forwards; }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
+        /* --- STEP 1: SLIDER VERIFICATION STYLES --- */
+        .slider-wrapper h1 { font-size: 24px; color: #f1f5f9; margin-bottom: 10px; }
+        .divider { width: 60px; height: 3px; background: #3b82f6; margin: 10px auto 20px; border-radius: 2px; }
+        .slider-desc { font-size: 14px; color: #cbd5e1; margin-bottom: 40px; }
+
+        .slider-container {
+            position: relative;
+            width: 100%;
+            height: 55px;
+            background: #1e2937;
+            border-radius: 50px;
+            overflow: hidden;
+            border: 2px solid #334155;
+            cursor: grab;
+            user-select: none;
+        }
+
+        .slider-track {
+            position: absolute;
+            height: 100%;
+            background: linear-gradient(to right, #3b82f6, #22c55e);
+            width: 0%;
+            transition: width 0.1s;
+        }
+
+        .slider-thumb {
+            position: absolute;
+            width: 48px;
+            height: 48px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: #334155;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            left: 2px;
+            top: 1.5px;
+            transition: left 0.1s;
+            z-index: 2;
+        }
+
+        /* --- STEP 2: LOGIN FORM STYLES --- */
+        .login-wrapper .app-icon {
+            width: 70px; height: 70px;
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            border-radius: 18px;
+            display: inline-flex; align-items: center; justify-content: center;
+            font-size: 30px; color: white;
+            margin-bottom: 15px;
+            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
+        }
+        
+        .input-group { text-align: left; margin: 25px 0; }
+        .input-group label { display: block; font-size: 12px; color: #94a3b8; margin-bottom: 8px; font-weight: 600; }
+        .input-field {
+            width: 100%; padding: 14px; border-radius: 12px;
+            border: 2px solid #334155; background: #0f172a;
+            color: white; font-size: 16px; text-align: center; letter-spacing: 2px;
+            outline: none; transition: 0.3s;
+        }
+        .input-field:focus { border-color: #3b82f6; }
+
+        .btn-login {
+            width: 100%; padding: 14px; border: none; border-radius: 12px;
+            background: linear-gradient(to right, #3b82f6, #2563eb);
+            color: white; font-weight: 600; font-size: 16px; cursor: pointer;
+            transition: 0.3s;
+        }
+        .btn-login:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(37, 99, 235, 0.4); }
+        
+        .error-msg { color: #ef4444; font-size: 13px; margin-top: 10px; display: none; }
+
+        /* --- STEP 3: DASHBOARD MENU STYLES --- */
+        .menu-wrapper h2 { color: #f8fafc; margin-bottom: 5px; }
+        .status-badge {
+            display: inline-block; padding: 5px 12px; background: rgba(34, 197, 94, 0.2);
+            color: #4ade80; border-radius: 20px; font-size: 12px; margin-bottom: 25px;
+            border: 1px solid rgba(34, 197, 94, 0.3);
+        }
+
+        .btn-action {
+            width: 100%; padding: 16px; border-radius: 14px; border: none;
+            font-size: 15px; font-weight: 600; cursor: pointer;
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+            margin-bottom: 12px; transition: 0.3s; text-decoration: none;
+        }
+
+        .btn-download { background: linear-gradient(135deg, #0ea5e9, #0284c7); color: white; }
+        .btn-download:hover { filter: brightness(1.1); transform: translateY(-2px); }
+
+        .btn-keygen { background: #1e2937; color: #e2e8f0; border: 1px solid #475569; }
+        .btn-keygen:hover { background: #334155; transform: translateY(-2px); }
+
+        .btn-back { background: none; border: none; color: #64748b; font-size: 13px; cursor: pointer; margin-top: 10px; text-decoration: underline; }
+
+        /* --- STEP 4: GENERATOR STYLES --- */
+        .gen-wrapper { text-align: center; color: white; }
+        .gen-title { color: #38bdf8; font-size: 22px; margin-bottom: 20px; }
+        .timer { font-size: 2.5em; font-weight: bold; color: #facc15; margin: 15px 0; font-family: monospace; }
+        
+        .btn-gen-action {
+            width: 100%; padding: 12px; border: none; border-radius: 8px;
+            font-size: 16px; font-weight: bold; cursor: pointer; color: white;
+            background: #3b82f6; transition: 0.3s;
+        }
+        .btn-gen-action:disabled { background: #475569; cursor: not-allowed; }
+        .btn-create-now { background: #22c55e !important; }
+
+        .key-result {
+            background: black; color: #22c55e; font-family: monospace;
+            padding: 15px; border: 1px dashed #22c55e; border-radius: 8px;
+            font-size: 18px; letter-spacing: 2px; margin-top: 20px;
+            display: none; word-break: break-all;
+        }
     </style>
 </head>
 <body>
 
-    <!-- Background Decoration -->
-    <div class="shape shape-1"></div>
-    <div class="shape shape-2"></div>
-
-    <div class="container">
+    <div class="main-container">
         
-        <!-- === VIEW 1: LOGIN SECTION === -->
-        <div id="login-section">
-            <div class="logo-area">
-                <div class="app-icon"><i class="fas fa-network-wired"></i></div>
-                <h1>NETYS</h1>
-                <p class="subtitle">Secure Application Gateway</p>
+        <!-- === VIEW 1: SLIDER VERIFICATION === -->
+        <div id="view-slider" class="slider-wrapper fade-in">
+            <h1>Verifikasi Keamanan</h1>
+            <div class="divider"></div>
+            <p class="slider-desc">Geser tombol ke kanan untuk melanjutkan</p>
+            
+            <div class="slider-container" id="slider">
+                <div class="slider-track" id="track"></div>
+                <div class="slider-thumb" id="thumb">→</div>
             </div>
+            
+            <div style="margin-top: 30px; font-size: 12px; color: #64748b;">
+                Powered by NETYS Security
+            </div>
+        </div>
+
+        <!-- === VIEW 2: LOGIN PAGE === -->
+        <div id="view-login" class="login-wrapper hidden">
+            <div class="app-icon"><i class="fas fa-shield-alt"></i></div>
+            <h2>NETYS ACCESS</h2>
+            <p style="color:#94a3b8; font-size:14px;">Masukkan kode untuk masuk</p>
 
             <div class="input-group">
-                <label for="access-code">MASUKKAN KODE AKSES</label>
-                <input type="password" id="access-code" class="input-field" placeholder="••••••••" autocomplete="off">
+                <label>KODE AKSES</label>
+                <input type="password" id="access-code" class="input-field" placeholder="••••••••">
             </div>
             
-            <button onclick="verifyCode()" class="btn btn-primary" id="login-btn">
-                <span id="btn-text">Verifikasi & Masuk</span>
-                <div class="spinner" id="btn-spinner"></div>
+            <button onclick="verifyLogin()" class="btn-login">
+                <i class="fas fa-sign-in-alt"></i> Masuk Sekarang
             </button>
             
-            <p class="error-msg" id="error-message">
-                <i class="fas fa-exclamation-circle"></i> Kode akses salah! Silakan coba lagi.
-            </p>
-            
-            <div style="margin-top: 20px;">
-                <a href="#" onclick="alert('Hubungi Admin via WhatsApp jika lupa.')" class="btn btn-outline" style="font-size: 14px; padding: 12px;">
-                    Lupa Kode Akses?
-                </a>
-            </div>
+            <p class="error-msg" id="login-error">Kode salah! Coba lagi.</p>
         </div>
 
-        <!-- === VIEW 2: DOWNLOAD MENU (Hidden) === -->
-        <div id="download-section" class="hidden">
-            <div class="logo-area">
-                <div class="app-icon"><i class="fas fa-check-circle" style="color: #25D366;"></i></div>
-                <h1>Akses Diterima</h1>
-                <p class="subtitle">Silakan pilih opsi di bawah ini</p>
+        <!-- === VIEW 3: DASHBOARD MENU === -->
+        <div id="view-dashboard" class="menu-wrapper hidden">
+            <div class="app-icon" style="background:none; box-shadow:none; font-size:40px; color:#4ade80;">
+                <i class="fas fa-check-circle"></i>
             </div>
+            <h2>Akses Diterima</h2>
+            <div class="status-badge">Verified User</div>
 
-            <!-- Tombol 1: Download Langsung (MediaFire) -->
-            <a href="https://www.mediafire.com/file/j1a1o1xa95yzgok/NETYSV4%252BBY_AZFER.apk/file" class="btn btn-download-link" target="_blank">
-                <i class="fas fa-cloud-download-alt"></i> Download Sekarang
+            <p style="color:#cbd5e1; font-size:14px; margin-bottom:20px;">
+                Pilih tindakan di bawah ini:
+            </p>
+
+            <!-- Tombol Download Langsung -->
+            <a href="https://www.mediafire.com/file/j1a1o1xa95yzgok/NETYSV4%252BBY_AZFER.apk/file" target="_blank" class="btn-action btn-download">
+                <i class="fas fa-cloud-download-alt"></i> Download Aplikasi
             </a>
 
-            <!-- Tombol 2: Buka Generator Key -->
-            <button onclick="showGenerator()" class="btn btn-generator">
+            <!-- Tombol Buka Generator -->
+            <button onclick="switchView('view-generator')" class="btn-action btn-keygen">
                 <i class="fas fa-key"></i> Ambil Kode Aksesnya
             </button>
-            
-            <button onclick="logout()" style="margin-top: 15px; background: none; border: none; color: #9ca3af; font-size: 12px; cursor: pointer; text-decoration: underline;">
-                Kembali ke Login
-            </button>
+
+            <button onclick="location.reload()" class="btn-back">Keluar / Logout</button>
         </div>
 
-        <!-- === VIEW 3: KEY GENERATOR (Hidden) === -->
-        <div id="generator-view" class="generator-container">
+        <!-- === VIEW 4: KEY GENERATOR === -->
+        <div id="view-generator" class="gen-wrapper hidden">
             <h2 class="gen-title">KEY GENERATOR</h2>
             
-            <!-- Area Status dan Timer -->
-            <div class="status-box" id="statusArea">
-                <p id="messageText" style="color:#ccc;">Klik tombol di bawah untuk memulai.</p>
-                <div id="timerDisplay" class="timer hidden">00</div>
+            <div id="gen-status-area">
+                <p id="gen-msg" style="font-size:14px; color:#cbd5e1;">Siap membuat key baru.</p>
+                <div id="gen-timer" class="timer hidden">00</div>
             </div>
 
-            <!-- Tombol Aksi -->
-            <button id="mainBtn" class="gen-btn" onclick="startProcess()">Create Generator</button>
+            <button id="gen-btn" class="btn-gen-action" onclick="startGenProcess()">Create Generator</button>
 
-            <!-- Area Hasil Key -->
-            <div id="resultArea" class="key-display">
-                NETYSYOONSOXIT
-            </div>
+            <div id="gen-result" class="key-result">NETYSYOONSOXIT</div>
 
-            <button onclick="backToDownload()" style="margin-top: 20px; background: transparent; border: 1px solid #555; color: #888; padding: 8px; width: 100%; border-radius: 5px; cursor: pointer;">
-                <i class="fas fa-arrow-left"></i> Kembali ke Menu Download
+            <button onclick="switchView('view-dashboard')" class="btn-back" style="margin-top:25px;">
+                <i class="fas fa-arrow-left"></i> Kembali ke Menu
             </button>
         </div>
 
     </div>
 
     <script>
-        // --- LOGIC LOGIN ---
+        // --- NAVIGATION LOGIC ---
+        function switchView(viewId) {
+            // Sembunyikan semua view
+            document.querySelectorAll('.main-container > div').forEach(div => {
+                div.classList.add('hidden');
+                div.classList.remove('fade-in');
+            });
+            
+            // Tampilkan view tujuan
+            const target = document.getElementById(viewId);
+            target.classList.remove('hidden');
+            target.classList.add('fade-in');
+        }
+
+        // --- STEP 1: SLIDER LOGIC ---
+        const slider = document.getElementById('slider');
+        const thumb = document.getElementById('thumb');
+        const track = document.getElementById('track');
+        
+        let isDragging = false;
+        let startX = 0;
+        let currentX = 0;
+        // Hitung lebar maksimal (lebar container - lebar thumb - padding)
+        const maxWidth = slider.offsetWidth - thumb.offsetWidth - 4; 
+
+        function updateSlider() {
+            const percentage = Math.min(Math.max(0, currentX / maxWidth), 1);
+            thumb.style.left = `${currentX + 2}px`; // +2 for border offset
+            track.style.width = `${percentage * 100}%`;
+        }
+
+        function completeVerification() {
+            thumb.innerHTML = '<i class="fas fa-check"></i>';
+            thumb.style.background = '#22c55e';
+            thumb.style.color = 'white';
+            
+            // Delay sedikit lalu pindah ke Login
+            setTimeout(() => {
+                switchView('view-login');
+            }, 800);
+        }
+
+        // Event Listeners untuk Slider (Mouse & Touch)
+        const startDrag = (x) => { isDragging = true; startX = x - currentX; };
+        const moveDrag = (x) => {
+            if (!isDragging) return;
+            currentX = Math.min(Math.max(0, x - startX), maxWidth);
+            updateSlider();
+        };
+        const endDrag = () => {
+            if (!isDragging) return;
+            isDragging = false;
+            if (currentX > maxWidth * 0.9) {
+                completeVerification();
+            } else {
+                currentX = 0;
+                updateSlider();
+            }
+        };
+
+        thumb.addEventListener('mousedown', e => startDrag(e.clientX));
+        document.addEventListener('mousemove', e => moveDrag(e.clientX));
+        document.addEventListener('mouseup', endDrag);
+
+        thumb.addEventListener('touchstart', e => startDrag(e.touches[0].clientX));
+        document.addEventListener('touchmove', e => moveDrag(e.touches[0].clientX));
+        document.addEventListener('touchend', endDrag);
+
+
+        // --- STEP 2: LOGIN LOGIC ---
         const VALID_CODE = "AZFER.ID";
 
-        function verifyCode() {
-            const inputCode = document.getElementById('access-code').value;
-            const errorMsg = document.getElementById('error-message');
-            const loginBtn = document.getElementById('login-btn');
-            const btnText = document.getElementById('btn-text');
-            const spinner = document.getElementById('btn-spinner');
-            const loginSection = document.getElementById('login-section');
-            const downloadSection = document.getElementById('download-section');
-
-            errorMsg.style.display = 'none';
-            btnText.style.display = 'none';
-            spinner.style.display = 'block';
-            loginBtn.disabled = true;
-            loginBtn.style.opacity = '0.7';
-
-            setTimeout(() => {
-                if (inputCode === VALID_CODE) {
-                    loginSection.classList.add('hidden');
-                    downloadSection.classList.remove('hidden');
-                    downloadSection.classList.add('fade-in');
-                } else {
-                    errorMsg.style.display = 'block';
-                    document.getElementById('access-code').value = '';
-                    document.getElementById('access-code').focus();
-                    btnText.style.display = 'block';
-                    spinner.style.display = 'none';
-                    loginBtn.disabled = false;
-                    loginBtn.style.opacity = '1';
-                }
-            }, 1200);
+        function verifyLogin() {
+            const input = document.getElementById('access-code').value;
+            const errorMsg = document.getElementById('login-error');
+            
+            if(input === VALID_CODE) {
+                switchView('view-dashboard');
+            } else {
+                errorMsg.style.display = 'block';
+                // Animasi getar sederhana
+                const field = document.getElementById('access-code');
+                field.style.borderColor = '#ef4444';
+                setTimeout(() => field.style.borderColor = '#334155', 500);
+            }
         }
-
-        document.getElementById('access-code').addEventListener("keypress", function(event) {
-            if (event.key === "Enter") verifyCode();
+        
+        // Enter key untuk login
+        document.getElementById('access-code').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') verifyLogin();
         });
 
-        function logout() {
-            location.reload();
-        }
 
-        // --- NAVIGASI ANTAR HALAMAN ---
-        function showGenerator() {
-            document.getElementById('download-section').classList.add('hidden');
-            const genView = document.getElementById('generator-view');
-            genView.style.display = 'block';
-            genView.classList.add('fade-in');
-        }
-
-        function backToDownload() {
-            document.getElementById('generator-view').style.display = 'none';
-            const dlSection = document.getElementById('download-section');
-            dlSection.classList.remove('hidden');
-            dlSection.classList.add('fade-in');
-        }
-
-        // --- LOGIC KEY GENERATOR ---
-        const mainBtn = document.getElementById('mainBtn');
-        const messageText = document.getElementById('messageText');
-        const timerDisplay = document.getElementById('timerDisplay');
-        const resultArea = document.getElementById('resultArea');
+        // --- STEP 4: GENERATOR LOGIC ---
+        const genBtn = document.getElementById('gen-btn');
+        const genMsg = document.getElementById('gen-msg');
+        const genTimer = document.getElementById('gen-timer');
+        const genResult = document.getElementById('gen-result');
         const SECRET_KEY = "NETYSYOONSOXIT";
 
-        function startProcess() {
-            mainBtn.disabled = true;
-            mainBtn.innerText = "Processing...";
-            messageText.innerText = "Sedang mempersiapkan verifikasi...";
-            messageText.style.color = "#fff";
+        function startGenProcess() {
+            // Tahap 1: 60 Detik
+            genBtn.disabled = true;
+            genBtn.innerText = "Processing...";
+            genMsg.innerText = "Menghubungkan ke server...";
             
-            startTimer(60, () => {
-                enableCreateNowButton();
+            runTimer(60, () => {
+                // Selesai Tahap 1
+                genBtn.disabled = false;
+                genBtn.innerText = "Create Now";
+                genBtn.classList.add('btn-create-now');
+                genMsg.innerText = "Server siap. Klik untuk generate.";
+                genBtn.onclick = startFinalGen;
             });
         }
 
-        function enableCreateNowButton() {
-            mainBtn.disabled = false;
-            mainBtn.innerText = "Create Now";
-            mainBtn.classList.add('btn-create-now');
-            messageText.innerText = "Verifikasi tahap 1 selesai. Silakan lanjutkan.";
-            mainBtn.onclick = startFinalGeneration;
-        }
-
-        function startFinalGeneration() {
-            mainBtn.disabled = true;
-            mainBtn.innerText = "Generating Key...";
-            messageText.innerText = "Sedang menghasilkan key unik...";
+        function startFinalGen() {
+            // Tahap 2: 30 Detik
+            genBtn.disabled = true;
+            genBtn.innerText = "Generating Key...";
+            genMsg.innerText = "Sedang membuat kunci unik...";
             
-            startTimer(30, () => {
-                showKey();
+            runTimer(30, () => {
+                // Selesai Tahap 2
+                genMsg.innerText = "Key Berhasil Dibuat!";
+                genBtn.style.display = 'none';
+                genResult.style.display = 'block';
+                genResult.innerText = SECRET_KEY;
             });
         }
 
-        function showKey() {
-            messageText.innerText = "Key berhasil dibuat!";
-            timerDisplay.classList.add('hidden');
-            mainBtn.style.display = 'none';
-            resultArea.style.display = 'block';
-            resultArea.innerText = SECRET_KEY;
-        }
-
-        function startTimer(seconds, callback) {
+        function runTimer(seconds, callback) {
             let timeLeft = seconds;
-            timerDisplay.classList.remove('hidden');
-            timerDisplay.innerText = timeLeft;
-
-            const countdown = setInterval(() => {
+            genTimer.classList.remove('hidden');
+            genTimer.innerText = timeLeft;
+            
+            const interval = setInterval(() => {
                 timeLeft--;
-                timerDisplay.innerText = timeLeft;
-
-                if (timeLeft <= 0) {
-                    clearInterval(countdown);
-                    timerDisplay.classList.add('hidden');
-                    if (callback) callback();
+                genTimer.innerText = timeLeft;
+                if(timeLeft <= 0) {
+                    clearInterval(interval);
+                    genTimer.classList.add('hidden');
+                    callback();
                 }
             }, 1000);
         }
