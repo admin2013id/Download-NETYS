@@ -143,25 +143,6 @@
 
         .btn-back { background: none; border: none; color: #64748b; font-size: 13px; cursor: pointer; margin-top: 10px; text-decoration: underline; }
 
-        /* --- STEP 4: GENERATOR STYLES --- */
-        .gen-wrapper { text-align: center; color: white; }
-        .gen-title { color: #38bdf8; font-size: 22px; margin-bottom: 20px; }
-        .timer { font-size: 2.5em; font-weight: bold; color: #facc15; margin: 15px 0; font-family: monospace; }
-        
-        .btn-gen-action {
-            width: 100%; padding: 12px; border: none; border-radius: 8px;
-            font-size: 16px; font-weight: bold; cursor: pointer; color: white;
-            background: #3b82f6; transition: 0.3s;
-        }
-        .btn-gen-action:disabled { background: #475569; cursor: not-allowed; }
-        .btn-create-now { background: #22c55e !important; }
-
-        .key-result {
-            background: black; color: #22c55e; font-family: monospace;
-            padding: 15px; border: 1px dashed #22c55e; border-radius: 8px;
-            font-size: 18px; letter-spacing: 2px; margin-top: 20px;
-            display: none; word-break: break-all;
-        }
     </style>
 </head>
 <body>
@@ -214,35 +195,17 @@
                 Pilih tindakan di bawah ini:
             </p>
 
-            <!-- Tombol Download Langsung (Link Diperbarui) -->
+            <!-- Tombol Download Langsung (Link NETYSV4.apk) -->
             <a href="https://www.mediafire.com/file/lbam44ggem4ztr6/NETYSV4.apk/file" target="_blank" class="btn-action btn-download">
                 <i class="fas fa-cloud-download-alt"></i> Download Aplikasi
             </a>
 
-            <!-- Tombol Buka Generator -->
-            <button onclick="switchView('view-generator')" class="btn-action btn-keygen">
+            <!-- Tombol Ambil Kode Akses (Link Eksternal) -->
+            <a href="https://yx.yoonso.shop/fakelagyoonso/getkey.php?s=df9f77c9dfaffe502c73" target="_blank" class="btn-action btn-keygen">
                 <i class="fas fa-key"></i> Ambil Kode Aksesnya
-            </button>
+            </a>
 
             <button onclick="location.reload()" class="btn-back">Keluar / Logout</button>
-        </div>
-
-        <!-- === VIEW 4: KEY GENERATOR === -->
-        <div id="view-generator" class="gen-wrapper hidden">
-            <h2 class="gen-title">KEY GENERATOR</h2>
-            
-            <div id="gen-status-area">
-                <p id="gen-msg" style="font-size:14px; color:#cbd5e1;">Siap membuat key baru.</p>
-                <div id="gen-timer" class="timer hidden">00</div>
-            </div>
-
-            <button id="gen-btn" class="btn-gen-action" onclick="startGenProcess()">Create Generator</button>
-
-            <div id="gen-result" class="key-result">NETYSYOONSOXIT</div>
-
-            <button onclick="switchView('view-dashboard')" class="btn-back" style="margin-top:25px;">
-                <i class="fas fa-arrow-left"></i> Kembali ke Menu
-            </button>
         </div>
 
     </div>
@@ -250,13 +213,10 @@
     <script>
         // --- NAVIGATION LOGIC ---
         function switchView(viewId) {
-            // Sembunyikan semua view
             document.querySelectorAll('.main-container > div').forEach(div => {
                 div.classList.add('hidden');
                 div.classList.remove('fade-in');
             });
-            
-            // Tampilkan view tujuan
             const target = document.getElementById(viewId);
             target.classList.remove('hidden');
             target.classList.add('fade-in');
@@ -270,12 +230,11 @@
         let isDragging = false;
         let startX = 0;
         let currentX = 0;
-        // Hitung lebar maksimal (lebar container - lebar thumb - padding)
         const maxWidth = slider.offsetWidth - thumb.offsetWidth - 4; 
 
         function updateSlider() {
             const percentage = Math.min(Math.max(0, currentX / maxWidth), 1);
-            thumb.style.left = `${currentX + 2}px`; // +2 for border offset
+            thumb.style.left = `${currentX + 2}px`;
             track.style.width = `${percentage * 100}%`;
         }
 
@@ -284,13 +243,11 @@
             thumb.style.background = '#22c55e';
             thumb.style.color = 'white';
             
-            // Delay sedikit lalu pindah ke Login
             setTimeout(() => {
                 switchView('view-login');
             }, 800);
         }
 
-        // Event Listeners untuk Slider (Mouse & Touch)
         const startDrag = (x) => { isDragging = true; startX = x - currentX; };
         const moveDrag = (x) => {
             if (!isDragging) return;
@@ -328,72 +285,15 @@
                 switchView('view-dashboard');
             } else {
                 errorMsg.style.display = 'block';
-                // Animasi getar sederhana
                 const field = document.getElementById('access-code');
                 field.style.borderColor = '#ef4444';
                 setTimeout(() => field.style.borderColor = '#334155', 500);
             }
         }
         
-        // Enter key untuk login
         document.getElementById('access-code').addEventListener('keypress', function (e) {
             if (e.key === 'Enter') verifyLogin();
         });
-
-
-        // --- STEP 4: GENERATOR LOGIC ---
-        const genBtn = document.getElementById('gen-btn');
-        const genMsg = document.getElementById('gen-msg');
-        const genTimer = document.getElementById('gen-timer');
-        const genResult = document.getElementById('gen-result');
-        const SECRET_KEY = "NETYSYOONSOXIT";
-
-        function startGenProcess() {
-            // Tahap 1: 60 Detik
-            genBtn.disabled = true;
-            genBtn.innerText = "Processing...";
-            genMsg.innerText = "Menghubungkan ke server...";
-            
-            runTimer(60, () => {
-                // Selesai Tahap 1
-                genBtn.disabled = false;
-                genBtn.innerText = "Create Now";
-                genBtn.classList.add('btn-create-now');
-                genMsg.innerText = "Server siap. Klik untuk generate.";
-                genBtn.onclick = startFinalGen;
-            });
-        }
-
-        function startFinalGen() {
-            // Tahap 2: 30 Detik
-            genBtn.disabled = true;
-            genBtn.innerText = "Generating Key...";
-            genMsg.innerText = "Sedang membuat kunci unik...";
-            
-            runTimer(30, () => {
-                // Selesai Tahap 2
-                genMsg.innerText = "Key Berhasil Dibuat!";
-                genBtn.style.display = 'none';
-                genResult.style.display = 'block';
-                genResult.innerText = SECRET_KEY;
-            });
-        }
-
-        function runTimer(seconds, callback) {
-            let timeLeft = seconds;
-            genTimer.classList.remove('hidden');
-            genTimer.innerText = timeLeft;
-            
-            const interval = setInterval(() => {
-                timeLeft--;
-                genTimer.innerText = timeLeft;
-                if(timeLeft <= 0) {
-                    clearInterval(interval);
-                    genTimer.classList.add('hidden');
-                    callback();
-                }
-            }, 1000);
-        }
     </script>
 </body>
 </html>
