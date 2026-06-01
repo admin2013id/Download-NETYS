@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
@@ -215,8 +214,8 @@
                 Pilih tindakan di bawah ini:
             </p>
 
-            <!-- Tombol Download Langsung -->
-            <a href="https://www.mediafire.com/file/j1a1o1xa95yzgok/NETYSV4%252BBY_AZFER.apk/file" target="_blank" class="btn-action btn-download">
+            <!-- Tombol Download Langsung (Link Diperbarui) -->
+            <a href="https://www.mediafire.com/file/lbam44ggem4ztr6/NETYSV4.apk/file" target="_blank" class="btn-action btn-download">
                 <i class="fas fa-cloud-download-alt"></i> Download Aplikasi
             </a>
 
